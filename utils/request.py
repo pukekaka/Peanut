@@ -2,9 +2,10 @@
 import requests
 import fake_useragent
 import time
+import re
 
-from dart.utils import Singleton
-from dart.utils import cache
+from utils import Singleton
+from utils import cache
 
 
 @cache()
@@ -62,6 +63,50 @@ class Request(object, metaclass=Singleton):
              stream: bool = False,
              timeout: int = 120):
         return self.request(url=url, method='POST', payload=payload, referer=referer, stream=stream, timeout=timeout)
+
+    def download(self,
+                 url: str,
+                 path: str,
+                 filename: str = None,
+                 method: str = 'GET',
+                 payload: dict = None,
+                 referer: str = None,
+                 timeout: int = 120) -> dict:
+        from utils.spinner import Spinner
+        from utils.file import create_folder
+        from urllib.parse import unquote
+        import os
+
+        create_folder(path)
+
+        r = self.request(url=url, method=method, payload=payload, referer=referer, stream=True, timeout=timeout)
+
+        headers = r.headeres.get('Content-Disposition')
+        if headers is None or not re.search('attachment', headers):
+            raise FileNotFoundError('target does not exist')
+
+        # total_size = int(r.headers.get('content-length', 0))
+        block_size = 8192
+
+        # Extract filename
+        extracted_filename = unquote(re.findall(r'filename="?([^"]*)"?', headers)[0])
+
+        if filename is None:
+            filename = extracted_filename
+        else:
+            filename = filename.format(extracted_filename)
+
+        spinner = Spinner('Downloading ' + filename)
+        spinner.start()
+
+        file_path = os.path.join(path, filename)
+        with open(file_path, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=block_size):
+                if chunk is not None:
+                    f.write(chunk)
+        r.close()
+        spinner.stop()
+        return {'filename': filename, 'path': path, 'full_path': file_path}
 
 
 request = Request()

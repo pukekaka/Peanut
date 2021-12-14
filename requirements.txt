@@ -1,2 +1,10 @@
 requests
 fake-useragent
+
+ipython
+ipython-genutils
+halo
+beautifulsoup4
+xmltodict
+appdirs
+urllib3

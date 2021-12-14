@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
-from dart.exceptions.errors import (APIKeyError,
-                                    TemporaryLocked,
-                                    NoDataReceived,
-                                    OverQueryLimit,
-                                    InvalidField,
-                                    ServiceClose,
-                                    UnknownError)
+from service.fs.dart.exceptions.errors import (APIKeyError, TemporaryLocked, NoDataReceived, OverQueryLimit, InvalidField, ServiceClose, UnknownError)
 
 
 def check_error(status):
