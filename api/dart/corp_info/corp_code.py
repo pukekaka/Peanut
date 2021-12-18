@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from collections import OrderedDict
 
-from service.fs.dart.auth import get_api_key
 from utils import request, unzip, get_cache_folder, search_file, xml_to_dict
+from service.fs.dart.auth import get_api_key as dart_get_api_key
 
 
 def get_corp_code() -> OrderedDict:
@@ -11,7 +11,7 @@ def get_corp_code() -> OrderedDict:
     with tempfile.TemporaryDirectory() as path:
         url = 'https://opendart.fss.or.kr/api/corpCode.xml'
 
-        api_key = get_api_key()
+        api_key = dart_get_api_key()
         payload = {'crtfc_key': api_key}
 
         resp = request.download(url=url, path=path, payload=payload)

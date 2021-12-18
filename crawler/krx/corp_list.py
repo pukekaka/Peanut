@@ -3,7 +3,7 @@ from utils import request
 from bs4 import BeautifulSoup
 
 
-def get_stock_market_list(corp_cls: str, include_corp_name=True) -> dict:
+def get_corp_list(corp_cls: str, include_corp_name=True) -> dict:
     if corp_cls.upper() == 'E':
         raise ValueError('ETC market is not supported')
 
@@ -29,7 +29,7 @@ def get_stock_market_list(corp_cls: str, include_corp_name=True) -> dict:
         'location': 'all',
     }
 
-    stock_market_list = dict()
+    corp_list = dict()
 
     resp = request.post(url=url, payload=payload, referer=referer)
     html = BeautifulSoup(resp.text, 'html.parser')
@@ -45,6 +45,6 @@ def get_stock_market_list(corp_cls: str, include_corp_name=True) -> dict:
             corp_info = {'sector': sector, 'product': product, 'corp_cls': corp_cls}
             if include_corp_name:
                 corp_info['corp_name'] = corp_name
-            stock_market_list[stock_code] = corp_info
+            corp_list[stock_code] = corp_info
 
-    return stock_market_list
+    return corp_list

@@ -5,6 +5,7 @@ from utils.request import request, get_user_agent
 from utils.notebook import dict_to_html, is_notebook
 from utils.spinner import Spinner, spinner_enable
 from utils.file import unzip, xml_to_dict, search_file, create_folder, get_cache_folder
+from utils.dataframe import dataframe_astype
 
 __all__ = [
     'cache',
@@ -13,4 +14,5 @@ __all__ = [
     'dict_to_html', 'is_notebook',
     'Spinner', 'spinner_enable',
     'unzip', 'xml_to_dict', 'search_file', 'create_folder', 'get_cache_folder',
+    'dataframe_astype',
 ]

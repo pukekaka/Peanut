@@ -81,7 +81,7 @@ class Request(object, metaclass=Singleton):
 
         r = self.request(url=url, method=method, payload=payload, referer=referer, stream=True, timeout=timeout)
 
-        headers = r.headeres.get('Content-Disposition')
+        headers = r.headers.get('Content-Disposition')
         if headers is None or not re.search('attachment', headers):
             raise FileNotFoundError('target does not exist')
 
