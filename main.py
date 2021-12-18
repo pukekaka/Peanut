@@ -13,8 +13,8 @@ if __name__ == '__main__':
 
     # get executive shareholder
     samsung = corp_list.find_by_corp_code('00126380')
-    print(samsung)
 
-    sample = samsung.get_executive_shareholder()
-    print(sample)
+    executive_shareholder = samsung.get_executive_shareholder()
+    majority_shareholder = samsung.get_majority_shareholder()
+
 

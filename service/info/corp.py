@@ -5,6 +5,7 @@ import pandas as pd
 from utils import dict_to_html, dataframe_astype
 from api.dart.corp_info.corp_profile import get_corp_profile as dart_get_corp_profile
 from api.dart.shareholder.executive import get_executive_shareholder as dart_get_executive_shareholder
+from api.dart.shareholder.majority import get_majority_shareholder as dart_get_majority_shareholder
 
 
 class Corp(object):
@@ -75,5 +76,20 @@ class Corp(object):
         ]
 
         df = dataframe_astype(df, columns_astype)
+        return df
 
+    def get_majority_shareholder(self):
+        resp = dart_get_majority_shareholder(corp_code=self.corp_code)
+        df = pd.DataFrame.from_dict(resp['list'])
+
+        columns_astype = [
+            ('stkqy', int),
+            ('stkqy_irds', int),
+            ('stkrt', float),
+            ('stkrt_irds', float),
+            ('ctr_stkqy', int),
+            ('ctr_stkrt', float)
+        ]
+
+        df = dataframe_astype(df, columns_astype)
         return df
