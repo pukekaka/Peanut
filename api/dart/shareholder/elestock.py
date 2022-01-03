@@ -2,8 +2,8 @@
 import re
 
 from utils import request
-from service.fs.dart.auth import get_api_key as dart_get_api_key
-from service.fs.dart.exceptions import check_status as dart_check_status
+from service.dart.auth import get_api_key as dart_get_api_key
+from service.dart.exceptions import check_status as dart_check_status
 
 
 def get_executive_shareholder(corp_code: str):

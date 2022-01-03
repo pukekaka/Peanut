@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from typing import Dict
+from typing import Dict, Union, List
 import pandas as pd
 
 from utils import dict_to_html, dataframe_astype
-from api.dart.corp_info.corp_profile import get_corp_profile as dart_get_corp_profile
-from api.dart.shareholder.executive import get_executive_shareholder as dart_get_executive_shareholder
-from api.dart.shareholder.majority import get_majority_shareholder as dart_get_majority_shareholder
+from api.dart.corp_info.company import get_corp_info as dart_get_corp_info
+
+from api.dart.shareholder.elestock import get_executive_shareholder as dart_get_executive_shareholder
+from api.dart.shareholder.majorstock import get_majority_shareholder as dart_get_majority_shareholder
 
 
 class Corp(object):
@@ -44,7 +45,7 @@ class Corp(object):
 
     def load(self):
         if self._loading is False:
-            info = dart_get_corp_profile(self._info['corp_code'])
+            info = dart_get_corp_info(self._info['corp_code'])
             info.pop('status')
             info.pop('message')
             self._info.update(info)
@@ -93,3 +94,18 @@ class Corp(object):
 
         df = dataframe_astype(df, columns_astype)
         return df
+
+    # def search(self,
+    #            bgn_de: str = None,
+    #            end_de: str = None,
+    #            last_reprt_at: str = 'N',
+    #            pblntf_ty: Union[str, List[str], None] = None,
+    #            pblntf_detail_ty: Union[str, List[str], None] = None,
+    #            corp_cls: str = None,
+    #            sort: str = 'date',
+    #            sort_mth: str = 'desc',
+    #            page_no: int = 1,
+    #            page_count: int = 10):
+    #
+    #     return dart_search(self.corp_code, bgn_de=bgn_de, end_de=end_de, last_reprt_at=last_reprt_at, pblntf_ty=pblntf_ty, pblntf_detail_ty=pblntf_detail_ty, corp_cls=corp_cls, sort=sort, sort_mth=sort_mth, page_no=page_no, page_count=page_count)
+    #

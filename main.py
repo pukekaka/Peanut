@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-import service.info as info_service
-import service.fs.dart as dart_service
+import service.dart as dart_service
 
 
 if __name__ == '__main__':
@@ -9,7 +8,7 @@ if __name__ == '__main__':
     dart_service.set_api_key(api_key=api_key)
 
     # Get Company List
-    corp_list = info_service.get_corp_list()
+    corp_list = dart_service.info.get_corp_list()
 
     # get executive shareholder
     samsung = corp_list.find_by_corp_code('00126380')

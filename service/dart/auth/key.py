@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from utils import Singleton, request
-from service.fs.dart.exceptions import check_status
+from service.dart.exceptions import check_status
 
 
 def set_api_key(api_key: str) -> str:

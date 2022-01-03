@@ -2,7 +2,7 @@
 from collections import OrderedDict
 
 from utils import request, unzip, get_cache_folder, search_file, xml_to_dict
-from service.fs.dart.auth import get_api_key as dart_get_api_key
+from service.dart.auth import get_api_key as dart_get_api_key
 
 
 def get_corp_code() -> OrderedDict:

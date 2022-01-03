@@ -4,10 +4,10 @@ from typing import Union, List
 
 from utils import Singleton
 from utils import Spinner
-from service.info.corp import Corp
+from service.dart.info.corp import Corp
 
 from crawler.krx.corp_list import get_corp_list as krx_get_corp_list
-from api.dart.corp_info.corp_code import get_corp_code as dart_get_corp_code
+from api.dart.corp_info.corpcode import get_corp_code as dart_get_corp_code
 
 
 def get_corp_list():
