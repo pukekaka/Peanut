@@ -17,4 +17,5 @@ if __name__ == '__main__':
     majority_shareholder = samsung.get_majority_shareholder()
 
     # test
+    # test2 commit
     
