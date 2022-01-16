@@ -16,4 +16,5 @@ if __name__ == '__main__':
     executive_shareholder = samsung.get_executive_shareholder()
     majority_shareholder = samsung.get_majority_shareholder()
 
-
+    # test
+    
